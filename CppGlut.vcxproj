@@ -130,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Cup.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="Teapot.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Cup.h" />
     <ClInclude Include="Entity.h" />

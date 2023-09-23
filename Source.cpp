@@ -9,18 +9,18 @@
 #include "Cup.h"
 #include "Teapot.h"
 #include "Cube.h"
+#include "Camera.h"
 
 using namespace std;
 using namespace glm;
 
 const int mSIMULATION_TIME = 20;
 
-int mDeltaTime = 0;
-long mPrevEpochTime = 0;
-
 int mCurrentTick = 0;
 
 vector<Entity*> mEntities;
+
+Camera mCamera;
 
 long getCurrentTimeInMillis() {
 	return std::chrono::system_clock::now().time_since_epoch().count() / 1000000;
@@ -46,19 +46,19 @@ void display(void)
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	// включаем тест глубины
-	glEnable(GL_DEPTH_TEST);
-	// устанавливаем камеру
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluLookAt(10, 15, 17.5, 0, 0, 0, 0, 1, 0);
 
 	float r = sin(mCurrentTick / 180.0f * 3.14159f);
 
+	// включаем тест глубины
+	glEnable(GL_DEPTH_TEST);
+	// устанавливаем камеру
+	mCamera.requestLayout();
+	//gluLookAt(10, 15, 17.5, 0, 0, 0, 0, 1, 0);
+
 	for (Entity* en : mEntities) {
-		en->setAngle(mCurrentTick * 3.0f);
-		en->translate(r * 10, 0,0);
-		en->rotateXZ(mCurrentTick);
+		//en->setAngle(mCurrentTick * 3.0f);
+		//en->translate(r * 10, 0,0);
+		//en->rotateXZ(mCurrentTick);
 		en->render();
 	}
 
@@ -71,21 +71,25 @@ void display(void)
 // функция вызывается каждые 20 мс
 void simulation(int value) {
 	// устанавливаем признак того, что окно нуждается в перерисовке
-
-	mDeltaTime = getCurrentTimeInMillis() - mPrevEpochTime;
-	std::cout << "\nDELTA_TIME: " << mDeltaTime;
-
 	glutPostRedisplay();
 	// эта же функция будет вызвана еще раз через 20 мс
-	mPrevEpochTime = getCurrentTimeInMillis();
 	glutTimerFunc(mSIMULATION_TIME, simulation, 0);
 };
 
 // Функция обработки нажатия клавиш
 void keyboardFunc(unsigned char key, int x, int y) {
 	//printf("Key code is %i\n", key);
-	std::cout << "KEY: " << (short)key << " " << key << "\n";
 	
+	switch (key) {
+		case 'w':
+			break;
+		case 'a':
+			break;
+		case 's':
+			break;
+		case 'd':
+			break;
+	}
 };
 
 
@@ -105,6 +109,8 @@ void main(int argc, char** argv)
 	glutInitWindowSize(1280, 720);
 	// 3. создаем окно
 	glutCreateWindow("Teapot");
+
+	mCamera.setPosition(50,0,0);
 
 	mEntities.push_back(new Teapot(2.0f));
 	mEntities.push_back(new Cube(1.5f));
