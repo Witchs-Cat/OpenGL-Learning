@@ -19,11 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{5a98d497-42c2-4251-b208-b9f530557497}</ProjectGuid>
-    <RootNamespace>CppGlut</RootNamespace>
+    <ProjectGuid>{830cbfc1-971d-4dc1-a550-80829ccb1014}</ProjectGuid>
+    <RootNamespace>DemoGlutCamera</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>DemoGlut.ObjectsPlacement</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -104,14 +105,21 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)freeglut\include;$(SolutionDir)glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\freeglut\include;$(SolutionDir)Dependencies\glm</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\freeglut\lib\x64</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glu32.lib;freeglut.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\freeglut\lib\x64</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>copy /Y $(SolutionDir)Dependencies\freeglut\bin\x64 $(OutDir)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -130,26 +138,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Cube.cpp" />
-    <ClCompile Include="Cup.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="Scalar.cpp" />
-    <ClCompile Include="Source.cpp" />
-    <ClCompile Include="Teapot.cpp" />
+    <ClCompile Include="DemoGlut.ObjectsPlacement.cpp" />
+    <ClCompile Include="Entities\Entity.cpp" />
+    <ClCompile Include="Entities\Scalar.cpp" />
+    <ClCompile Include="Entities\Primitives\Teapot.cpp" />
+    <ClCompile Include="Windows\RenderWindow.cpp" />
+    <ClCompile Include="Windows\WindowSettings.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Cube.h" />
-    <ClInclude Include="Cup.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="Scalar.h" />
-    <ClInclude Include="Teapot.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <CopyFileToFolders Include="freeglut\bin\x64\freeglut.dll">
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
+    <ClInclude Include="Entities\Entity.h" />
+    <ClInclude Include="Entities\Scalar.h" />
+    <ClInclude Include="Entities\Primitives\Teapot.h" />
+    <ClInclude Include="Windows\RenderWindow.h" />
+    <ClInclude Include="Windows\WindowSettings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

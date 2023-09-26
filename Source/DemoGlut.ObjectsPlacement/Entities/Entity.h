@@ -1,20 +1,16 @@
 #pragma once
-#include <windows.h>
-
-#include <iostream>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp> 
+#include <glm/gtc/type_ptr.hpp>
 
+#include "GL/freeglut.h"
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include "GL/freeglut.h"
 
-
-class Entity {
+class Entity
+{
 private:
-	
 	float x = 0;
 	float y = 0;
 	float z = 0;
@@ -23,25 +19,24 @@ private:
 	float translateY = 0;
 	float translateZ = 0;
 
-	GLfloat model[16] = {
-		 1,  0,  0,  0,
-		 0,  1,  0,  0,
-		 0,  0,  1,  0,
-		 0,  0,  0,  1 // default position (x,y,z)
+	GLfloat spaceModel[16] = {
+		 1,  0,  0,  0, // ось Ox
+		 0,  1,  0,  0, // ось Oy
+		 0,  0,  1,  0, // ось Oz
+		 0,  0,  0,  1  // позиция объекта (начало системы координат)
 	};
 
-
-
 protected:
-	virtual void getModel()=0;
+	virtual void getSpaceModel() = 0;
+
 public:
-
-	void recalculateMatrix();
-
 	void setPosition(float x, float y, float z);
 	void setAngle(float angle);
 	void rotateXY(float angle);
 	void rotateXZ(float angle);
 	void translate(float x, float y, float z);
-	void render();
+
+	virtual void update(double elapsed);
+	virtual void render(double elapsed);
 };
+
