@@ -9,7 +9,7 @@ UpdateEventArgs::UpdateEventArgs(double elapsed, POINT* cursorPosition, POINT* c
 
 bool UpdateEventArgs::KeyIsPressed(int keyId)
 {
-	return GetKeyState(keyId) && 0x8000;
+	return GetKeyState(keyId) & 0x8000;
 }
 
 POINT* UpdateEventArgs::GetCursorPosition()

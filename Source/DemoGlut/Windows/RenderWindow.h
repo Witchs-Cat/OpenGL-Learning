@@ -3,7 +3,7 @@
 #include "WindowSettings.h"
 #include "../Entities/Entity.h"
 #include "../EventArgs/EventsFactory.h"
-#include "../Camera/BaseCamera.h"
+#include "../Camera/MovingCamera.h"
 
 class RenderWindow : IDisplayedObject
 {

@@ -25,7 +25,7 @@ void FillWithEntities()
 {
 	//Я не понял плюсы, при попытки инициализирвоать поле напрямую
 	//window->Camera = new BaseCamera; window->Camera == nullptr
-	window->SetCamera(new BaseCamera());
+	window->SetCamera(new MovingCamera());
 	window->Camera->SetCameraPosition(0, 0, 55);
 	window->Camera->SetUpVector(0, 1, 0);
 

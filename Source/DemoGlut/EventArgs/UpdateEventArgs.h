@@ -1,7 +1,8 @@
 #pragma once
 #include "BaseEventArgs.h"
 
-class UpdateEventArgs : BaseEventArgs
+class UpdateEventArgs : 
+	public BaseEventArgs
 {
 private:
 	POINT* _CursorMove;
@@ -11,7 +12,7 @@ public:
 	bool KeyIsPressed(int keyId);
 	POINT* GetCursorPosition();
 	POINT* GetCursorMove();
-
+	
 	~UpdateEventArgs();
 };
 
