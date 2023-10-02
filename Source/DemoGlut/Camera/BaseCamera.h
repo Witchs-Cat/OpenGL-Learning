@@ -5,7 +5,7 @@
 class BaseCamera : IDisplayedObject
 {
 public:
-	void virtual Render(RenderEventArgs* args) abstract;
-	void virtual Update(UpdateEventArgs* args) abstract;
+	void virtual Render(RenderEventArgs* args);
+	void virtual Update(UpdateEventArgs* args);
 };
 

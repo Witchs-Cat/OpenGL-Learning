@@ -56,6 +56,9 @@ void RenderWindow::Display(void)
 	_eventsFactory->GetEventArgs(updateArgs, renderArgs);
 	Update(updateArgs);
 	Render(renderArgs);
+
+	delete updateArgs;
+	delete renderArgs;
 }
 
 int RenderWindow::GetUpdateTime()
@@ -83,4 +86,6 @@ void RenderWindow::Init()
 
 	//¬ключаем один раз тест глубины и не праимс€.
 	glEnable(GL_DEPTH_TEST);
+
+	_eventsFactory->UpdateLastRenderingTime();
 }

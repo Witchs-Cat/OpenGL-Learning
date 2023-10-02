@@ -10,7 +10,7 @@ void EventsFactory::GetEventArgs(UpdateEventArgs*& updateArgs, RenderEventArgs*&
 	renderArgs = new RenderEventArgs(elapsed.count());
 }
 
-void UpdateLastRenderingTime()
+void EventsFactory::UpdateLastRenderingTime()
 {
 	_lastRenderingTime = std::chrono::system_clock::now();
 }
