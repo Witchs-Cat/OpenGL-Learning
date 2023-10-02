@@ -5,7 +5,7 @@
 class Scalar : public Entity 
 {
 protected:
-	float mSize = 1.0f;
+	float _modelSize = 1.0f;
 
 public:
 	Scalar(float size);

@@ -9,8 +9,8 @@ public:
 	Teapot(float size, float positionX, float positionY, float positionZ);
 
 protected:
-	void getSpaceModel();
+	void GetViewProjectionMatrix();
 
 public:
-	void update(double elapsed);
+	void Update(double elapsed);
 };

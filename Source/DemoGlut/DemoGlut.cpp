@@ -3,47 +3,39 @@
 
 #include <iostream>
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp> 
-
-#include "GL/freeglut.h"
-#include <GL/gl.h>
-#include <GL/glu.h>
-
 #include "Windows/RenderWindow.h"
 #include "Entities/Primitives/Teapot.h"
 
 RenderWindow* window;
 
-void display()
-{	window->display();}
+void Display()
+{	window->Display();}
 
-void reshape(int w, int h)
-{	window->resize(w, h);}
+void Reshape(int w, int h)
+{	window->Resize(w, h);}
 
-void simulation(int value)
+void Simulation(int value)
 {
 	glutPostRedisplay();
 	// эта же функция будет вызвана еще раз спустя время
-	glutTimerFunc(window->getUpdateTime() , simulation, 0);
+	glutTimerFunc(window->GetUpdateTime() , Simulation, 0);
 }
 
-void fillWithEntities()
+void FillWithEntities()
 {
-	window->addEntity(new Teapot(1.0f, 5.0f, 0.0f, 0.0f));
-	window->addEntity(new Teapot(1.0f, 0.0f, 0.0f, 5.0f));
-	window->addEntity(new Teapot(1.0f, -5.0f, 0.0f, 0.0f));
-	window->addEntity(new Teapot(1.0f, 0.0f, 0.0f, -5.0f));
+	window->AddEntity(new Teapot(1.0f, 5.0f, 0.0f, 0.0f));
+	window->AddEntity(new Teapot(2.0f, 0.0f, 5.0f, 0.0f));
+	window->AddEntity(new Teapot(1.0f, -5.0f, 0.0f, 0.0f));
+	window->AddEntity(new Teapot(2.0f, 0.0f, -5.0f, 0.0f));
 }
 
 int main(int argc, char** argv)
 {	
 	auto settings = new WindowSettings();
-	settings->displayMode = GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE;
-	settings->height = 300;
-	settings->width = 300;
-	settings->updateTime = 20;
+	settings->DisplayMode = GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE;
+	settings->Height = 300;
+	settings->Width = 300;
+	settings->UpdateTime = 20;
 
 	window = new RenderWindow(settings);
 
@@ -51,16 +43,16 @@ int main(int argc, char** argv)
 	glutInit(&argc, argv);
 
 	// инициализируем окно
-	window->init();
+	window->Init();
 	// заполняем окно сущностями
-	fillWithEntities();
+	FillWithEntities();
 
 	// устанавливаем функцию отрисовки окна
-	glutDisplayFunc(display);
+	glutDisplayFunc(Display);
 	// устанавливаем функцию, которая будет вызываться при изменении размеров окна
-	glutReshapeFunc(reshape);
+	glutReshapeFunc(Reshape);
 	// устанавливаем функцию, которая будет вызвана через 0 мс
-	glutTimerFunc(0, simulation, 2);
+	glutTimerFunc(0, Simulation, 2);
 	// основной цикл обработки сообщений ОС
 	glutMainLoop();
 

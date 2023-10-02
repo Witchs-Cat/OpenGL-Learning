@@ -2,5 +2,5 @@
 
 Scalar::Scalar(float size) 
 {
-	mSize = size;
+	_modelSize = size;
 }

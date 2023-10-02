@@ -5,14 +5,14 @@ Teapot::Teapot(float size): Teapot(size, 0,0,0)
 
 Teapot::Teapot(float size, float x, float y, float z): Scalar(size)
 {
-	setPosition(x, y, z);
+	SetPosition(x, y, z);
 }
 
-void Teapot::getSpaceModel()
+void Teapot::GetViewProjectionMatrix()
 {
-	glutWireTeapot(mSize);
+	glutWireTeapot(_modelSize);
 }
 
-void Teapot::update(double elapsed)
+void Teapot::Update(double elapsed)
 {
 }

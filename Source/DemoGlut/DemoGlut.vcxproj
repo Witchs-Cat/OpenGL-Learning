@@ -24,7 +24,7 @@
     <ProjectGuid>{830cbfc1-971d-4dc1-a550-80829ccb1014}</ProjectGuid>
     <RootNamespace>DemoGlutCamera</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>DemoGlut.ObjectsPlacement</ProjectName>
+    <ProjectName>DemoGlut</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -138,17 +138,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DemoGlut.ObjectsPlacement.cpp" />
+    <ClCompile Include="Camera\BaseCamera.cpp" />
+    <ClCompile Include="Camera\SphericalCordinatesCamera.cpp" />
+    <ClCompile Include="EventArgs\BaseEventArgs.cpp" />
+    <ClCompile Include="DemoGlut.cpp" />
     <ClCompile Include="Entities\Entity.cpp" />
     <ClCompile Include="Entities\Scalar.cpp" />
     <ClCompile Include="Entities\Primitives\Teapot.cpp" />
+    <ClCompile Include="EventArgs\UpdateEventArgs.cpp" />
+    <ClCompile Include="EventArgs\RenderEventArgs.cpp" />
+    <ClCompile Include="EventArgs\EventsFactory.cpp" />
     <ClCompile Include="Windows\RenderWindow.cpp" />
     <ClCompile Include="Windows\WindowSettings.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera\BaseCamera.h" />
+    <ClInclude Include="Camera\SphericalCordinatesCamera.h" />
+    <ClInclude Include="EventArgs\BaseEventArgs.h" />
     <ClInclude Include="Entities\Entity.h" />
     <ClInclude Include="Entities\Scalar.h" />
     <ClInclude Include="Entities\Primitives\Teapot.h" />
+    <ClInclude Include="Includes.h" />
+    <ClInclude Include="EventArgs\UpdateEventArgs.h" />
+    <ClInclude Include="EventArgs\RenderEventArgs.h" />
+    <ClInclude Include="EventArgs\EventsFactory.h" />
+    <ClInclude Include="IDisplayedObject.h" />
     <ClInclude Include="Windows\RenderWindow.h" />
     <ClInclude Include="Windows\WindowSettings.h" />
   </ItemGroup>
