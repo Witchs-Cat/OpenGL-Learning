@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseCamera.h"
-class SphericalCordinatesCamera :
+
+class MovingCamera :
     public BaseCamera
 {
 };

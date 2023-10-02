@@ -2,6 +2,7 @@
 
 RenderWindow::RenderWindow(WindowSettings* settings)
 {
+	Camera = nullptr;
 	_eventsFactory = new EventsFactory();
 	_displayMode = settings->DisplayMode;
 	_positionX = settings->PositionX;
@@ -23,10 +24,11 @@ void RenderWindow::Resize(int w, int h)
 
 void RenderWindow::Update(UpdateEventArgs* args)
 {
+	if (Camera != nullptr)
+		Camera->Update(args);
+
 	for (Entity* entity : _renderedEntities)
-	{
 		entity->Update(args);
-	}
 }
 
 void RenderWindow::Render(RenderEventArgs* args)
@@ -36,15 +38,12 @@ void RenderWindow::Render(RenderEventArgs* args)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(0, 0, 55, 
-			  0, 0, 0,
-			  0, 1, 0);
-
+	
+	if (Camera != nullptr)
+		Camera->Render(args);
 
 	for (Entity* entity : _renderedEntities)
-	{
 		entity->Render(args);
-	}
 
 	glutSwapBuffers();
 }
@@ -56,6 +55,7 @@ void RenderWindow::Display(void)
 	_eventsFactory->GetEventArgs(updateArgs, renderArgs);
 	Update(updateArgs);
 	Render(renderArgs);
+
 
 	delete updateArgs;
 	delete renderArgs;
@@ -69,6 +69,11 @@ int RenderWindow::GetUpdateTime()
 void RenderWindow::AddEntity(Entity* entity)
 {
 	_renderedEntities.push_back(entity);
+}
+
+void RenderWindow::SetCamera(BaseCamera* camera)
+{
+	Camera = camera;
 }
 
 void RenderWindow::Init()
@@ -87,5 +92,5 @@ void RenderWindow::Init()
 	//¬ключаем один раз тест глубины и не праимс€.
 	glEnable(GL_DEPTH_TEST);
 
-	_eventsFactory->UpdateLastRenderingTime();
+	_eventsFactory->UpdateState();
 }

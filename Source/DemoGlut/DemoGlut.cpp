@@ -23,6 +23,12 @@ void Simulation(int value)
 
 void FillWithEntities()
 {
+	//Я не понял плюсы, при попытки инициализирвоать поле напрямую
+	//window->Camera = new BaseCamera; window->Camera == nullptr
+	window->SetCamera(new BaseCamera());
+	window->Camera->SetCameraPosition(0, 0, 55);
+	window->Camera->SetUpVector(0, 1, 0);
+
 	window->AddEntity(new Teapot(1.0f, 5.0f, 0.0f, 0.0f));
 	window->AddEntity(new Teapot(2.0f, 0.0f, 5.0f, 0.0f));
 	window->AddEntity(new Teapot(1.0f, -5.0f, 0.0f, 0.0f));
@@ -38,21 +44,20 @@ int main(int argc, char** argv)
 	settings->UpdateTime = 20;
 
 	window = new RenderWindow(settings);
+	// заполняем окно сущностями
+	FillWithEntities();
 
 	// инициализация библиотеки GLUT
 	glutInit(&argc, argv);
 
 	// инициализируем окно
 	window->Init();
-	// заполняем окно сущностями
-	FillWithEntities();
-
 	// устанавливаем функцию отрисовки окна
 	glutDisplayFunc(Display);
 	// устанавливаем функцию, которая будет вызываться при изменении размеров окна
 	glutReshapeFunc(Reshape);
 	// устанавливаем функцию, которая будет вызвана через 0 мс
-	glutTimerFunc(0, Simulation, 2);
+	glutTimerFunc(0, Simulation, 0);
 	// основной цикл обработки сообщений ОС
 	glutMainLoop();
 

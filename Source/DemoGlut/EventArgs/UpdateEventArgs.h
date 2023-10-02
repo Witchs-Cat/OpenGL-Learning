@@ -3,8 +3,15 @@
 
 class UpdateEventArgs : BaseEventArgs
 {
-
+private:
+	POINT* _CursorMove;
+	POINT* _CursorPosition;
 public:
-	UpdateEventArgs(double elapsed);
+	UpdateEventArgs(double elapsed, POINT* cursorPosition, POINT* cursorMove);
+	bool KeyIsPressed(int keyId);
+	POINT* GetCursorPosition();
+	POINT* GetCursorMove();
+
+	~UpdateEventArgs();
 };
 

@@ -3,6 +3,7 @@
 #include "WindowSettings.h"
 #include "../Entities/Entity.h"
 #include "../EventArgs/EventsFactory.h"
+#include "../Camera/BaseCamera.h"
 
 class RenderWindow : IDisplayedObject
 {
@@ -19,6 +20,10 @@ private:
 	std::list<Entity*> _renderedEntities;
 
 public:
+	//Проблемка, как не допустить утечку памяти, 
+	//но красиво убрать проверку на nullptr
+	BaseCamera* Camera;
+
 	RenderWindow(WindowSettings* settings);
 	// функция инициализации окна
 	void Init();
@@ -31,6 +36,8 @@ public:
 	// функция вызывается каждые updateTime мс
 
 	void AddEntity(Entity* entity);
+
+	void SetCamera(BaseCamera* camera);
 
 	void Display(void);
 

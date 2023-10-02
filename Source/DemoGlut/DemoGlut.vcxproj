@@ -139,7 +139,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera\BaseCamera.cpp" />
-    <ClCompile Include="Camera\SphericalCordinatesCamera.cpp" />
     <ClCompile Include="EventArgs\BaseEventArgs.cpp" />
     <ClCompile Include="DemoGlut.cpp" />
     <ClCompile Include="Entities\Entity.cpp" />
@@ -148,12 +147,12 @@
     <ClCompile Include="EventArgs\UpdateEventArgs.cpp" />
     <ClCompile Include="EventArgs\RenderEventArgs.cpp" />
     <ClCompile Include="EventArgs\EventsFactory.cpp" />
+    <ClCompile Include="Camera\MovingCamera.cpp" />
     <ClCompile Include="Windows\RenderWindow.cpp" />
     <ClCompile Include="Windows\WindowSettings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\BaseCamera.h" />
-    <ClInclude Include="Camera\SphericalCordinatesCamera.h" />
     <ClInclude Include="EventArgs\BaseEventArgs.h" />
     <ClInclude Include="Entities\Entity.h" />
     <ClInclude Include="Entities\Scalar.h" />
@@ -163,6 +162,7 @@
     <ClInclude Include="EventArgs\RenderEventArgs.h" />
     <ClInclude Include="EventArgs\EventsFactory.h" />
     <ClInclude Include="IDisplayedObject.h" />
+    <ClInclude Include="Camera\MovingCamera.h" />
     <ClInclude Include="Windows\RenderWindow.h" />
     <ClInclude Include="Windows\WindowSettings.h" />
   </ItemGroup>
