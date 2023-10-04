@@ -3,7 +3,7 @@
 Teapot::Teapot(float size): Teapot(size, 0,0,0)
 { }
 
-Teapot::Teapot(float size, float x, float y, float z): Scalar(size)
+Teapot::Teapot(float size, float x, float y, float z): GlutEntity(size)
 {
 	SetPosition(x, y, z);
 }

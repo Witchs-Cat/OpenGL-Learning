@@ -142,12 +142,12 @@
     <ClCompile Include="EventArgs\BaseEventArgs.cpp" />
     <ClCompile Include="DemoGlut.cpp" />
     <ClCompile Include="Entities\Entity.cpp" />
-    <ClCompile Include="Entities\Scalar.cpp" />
     <ClCompile Include="Entities\Primitives\Teapot.cpp" />
     <ClCompile Include="EventArgs\UpdateEventArgs.cpp" />
     <ClCompile Include="EventArgs\RenderEventArgs.cpp" />
     <ClCompile Include="EventArgs\EventsFactory.cpp" />
     <ClCompile Include="Camera\MovingCamera.cpp" />
+    <ClCompile Include="Entities\GlutEntity.cpp" />
     <ClCompile Include="Windows\RenderWindow.cpp" />
     <ClCompile Include="Windows\WindowSettings.cpp" />
   </ItemGroup>
@@ -155,8 +155,8 @@
     <ClInclude Include="Camera\BaseCamera.h" />
     <ClInclude Include="EventArgs\BaseEventArgs.h" />
     <ClInclude Include="Entities\Entity.h" />
-    <ClInclude Include="Entities\Scalar.h" />
     <ClInclude Include="Entities\Primitives\Teapot.h" />
+    <ClInclude Include="Entities\GlutEntity.h" />
     <ClInclude Include="Includes.h" />
     <ClInclude Include="EventArgs\UpdateEventArgs.h" />
     <ClInclude Include="EventArgs\RenderEventArgs.h" />

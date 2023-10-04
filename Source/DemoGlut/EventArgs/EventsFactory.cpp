@@ -37,8 +37,8 @@ void EventsFactory::GetEventArgs(UpdateEventArgs*& updateArgs, RenderEventArgs*&
 	if (cursorPosition == nullptr)
 		cursorPosition = _lastCursorPosition;
 
-	cursorMove->x = _lastCursorPosition->x - cursorPosition->x;
-	cursorMove->y = _lastCursorPosition->y - cursorPosition->y;
+	cursorMove->x =  cursorPosition->x - _lastCursorPosition->x;
+	cursorMove->y =  cursorPosition->y - _lastCursorPosition->y;
 	_lastCursorPosition->x = cursorPosition->x;
 	_lastCursorPosition->y = cursorPosition->y;
 

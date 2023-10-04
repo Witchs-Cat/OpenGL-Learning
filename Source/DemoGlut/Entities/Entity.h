@@ -12,15 +12,13 @@ private:
 	float _translateY = 0;
 	float _translateZ = 0;
 
+protected:
 	GLfloat _viewProjectionMatrix[16] = {
 		 1,  0,  0,  0, // ось Ox
 		 0,  1,  0,  0, // ось Oy
 		 0,  0,  1,  0, // ось Oz
 		 0,  0,  0,  1  // позиция объекта (начало системы координат)
 	};
-
-protected:
-	virtual void GetViewProjectionMatrix() = 0;
 
 public:
 	void SetPosition(float x, float y, float z);

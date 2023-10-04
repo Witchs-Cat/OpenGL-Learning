@@ -9,8 +9,10 @@ private:
     float _angleO;
     //X ~ Y
     float _angleF;
-    float _radius;
+    float _radius = 30;
 
+    
+    void UpdateCameraPosition();
 public:
     void Update(UpdateEventArgs* args) override;
 

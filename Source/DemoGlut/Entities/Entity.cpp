@@ -3,14 +3,9 @@
 void Entity::Update(UpdateEventArgs* args)
 { }
 
+
 void Entity::Render(RenderEventArgs* args) 
-{
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glPushMatrix();
-	glMultMatrixf(_viewProjectionMatrix);
-	this->GetViewProjectionMatrix();
-	glPopMatrix();
-}
+{ }
 
 void Entity::SetPosition(float x,float y,float z) 
 {
@@ -30,8 +25,6 @@ void Entity::Translate(float x, float y, float z)
 	_translateZ = z;
 }
 
-void Entity::GetViewProjectionMatrix() 
-{ }
 
 void Entity::RotateXY(float angle) 
 {

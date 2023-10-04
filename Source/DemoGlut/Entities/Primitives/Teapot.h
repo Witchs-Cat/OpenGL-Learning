@@ -1,8 +1,8 @@
 #pragma once
 
-#include "..\Scalar.h"
+#include "..\GlutEntity.h"
 
-class Teapot: public Scalar 
+class Teapot: public GlutEntity
 {
 public:
 	Teapot(float size);

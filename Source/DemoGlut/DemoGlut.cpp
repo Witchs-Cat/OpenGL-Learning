@@ -23,16 +23,14 @@ void Simulation(int value)
 
 void FillWithEntities()
 {
-	//Я не понял плюсы, при попытки инициализирвоать поле напрямую
-	//window->Camera = new BaseCamera; window->Camera == nullptr
 	window->SetCamera(new MovingCamera());
 	window->Camera->SetCameraPosition(0, 0, 55);
 	window->Camera->SetUpVector(0, 1, 0);
 
 	window->AddEntity(new Teapot(1.0f, 5.0f, 0.0f, 0.0f));
 	window->AddEntity(new Teapot(2.0f, 0.0f, 5.0f, 0.0f));
-	window->AddEntity(new Teapot(1.0f, -5.0f, 0.0f, 0.0f));
-	window->AddEntity(new Teapot(2.0f, 0.0f, -5.0f, 0.0f));
+	window->AddEntity(new Teapot(4.0f, -5.0f, 0.0f, 0.0f));
+	window->AddEntity(new Teapot(6.0f, 0.0f, -5.0f, 0.0f));
 }
 
 int main(int argc, char** argv)

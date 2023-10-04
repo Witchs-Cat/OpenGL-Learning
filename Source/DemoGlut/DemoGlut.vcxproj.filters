@@ -21,9 +21,6 @@
     <ClCompile Include="Entities\Primitives\Teapot.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Entities\Scalar.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Windows\RenderWindow.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -51,15 +48,15 @@
     <ClCompile Include="Camera\MovingCamera.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Entities\GlutEntity.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entities\Entity.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Entities\Primitives\Teapot.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Entities\Scalar.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Windows\RenderWindow.h">
@@ -90,6 +87,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Camera\MovingCamera.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\GlutEntity.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
