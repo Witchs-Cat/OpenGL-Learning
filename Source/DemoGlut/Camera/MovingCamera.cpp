@@ -30,8 +30,8 @@ void MovingCamera::Update(UpdateEventArgs* args)
 	if (args->KeyIsPressed(VK_LBUTTON))
 	{
 		POINT* cursorMove = args->GetCursorMove();
-		setAngelF(_angleF + cursorMove->y / 500.0f);
-		//setAngelO(_angleO - cursorMove->x / 500.0f);
+		//setAngelF(_angleF + cursorMove->y / 500.0f);
+		setAngelO(_angleO - cursorMove->x / 500.0f);
 	}
 
 
