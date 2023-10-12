@@ -5,57 +5,38 @@ using namespace std::chrono;
 
 EventsFactory::EventsFactory()
 {
-	_lastCursorPosition = new POINT;
+	_updateArgs = new UpdateEventArgs();
+	_renderArgs = new RenderEventArgs();
 }
 
-POINT* GetCurrentCursorPosition()
+UpdateEventArgs* EventsFactory::GetUpdateArgs()
 {
-	POINT position;
-	if (GetCursorPos(&position)) 
-	{
-		POINT* result = new POINT;
-		result->x = position.x;
-		result->y = position.y;
-		return result;
-	}
-	return nullptr;
+	return _updateArgs;
 }
 
-//Снова утечка
-void EventsFactory::GetEventArgs(UpdateEventArgs*& updateArgs, RenderEventArgs*& renderArgs)
+
+RenderEventArgs* EventsFactory::GetRenderArgs()
+{
+	return _renderArgs;
+}
+
+void EventsFactory::UpdateState()
 {
 	auto now = std::chrono::system_clock::now();
 
-	long long elapsedNanoseconds = duration_cast<nanoseconds>(now - _lastRenderingTime).count();
-	double elapsedMilliseconds = elapsedNanoseconds / 10E5;
+	long long elapsedMicroseconds = (now.time_since_epoch() - _lastRenderingTime.time_since_epoch()).count();
+	double elapsedMilliseconds = elapsedMicroseconds / 10E3;
 
 	_lastRenderingTime = now;
 
 	auto cursorMove = new POINT();
-	POINT* cursorPosition = GetCurrentCursorPosition();
 
-	if (cursorPosition == nullptr)
-		cursorPosition = _lastCursorPosition;
-
-	cursorMove->x =  cursorPosition->x - _lastCursorPosition->x;
-	cursorMove->y =  cursorPosition->y - _lastCursorPosition->y;
-	_lastCursorPosition->x = cursorPosition->x;
-	_lastCursorPosition->y = cursorPosition->y;
-
-	updateArgs = new UpdateEventArgs(elapsedMilliseconds, cursorPosition, cursorMove);
-	renderArgs = new RenderEventArgs(elapsedMilliseconds);
-}
-
-
-void EventsFactory::UpdateState()
-{
-	_lastRenderingTime = std::chrono::system_clock::now();
-
-	POINT* cursorPosition = GetCurrentCursorPosition();
-	if (cursorPosition != nullptr)
+	POINT cursorPosition;
+	if (GetCursorPos(&cursorPosition))
 	{
-		_lastCursorPosition->x = cursorPosition->x;
-		_lastCursorPosition->y = cursorPosition->y;
+		_updateArgs->GetCursorData()->MoveTo(cursorPosition);
 	}
-	delete cursorPosition;
+
+	_updateArgs->SetElapsedMilliseconds(elapsedMilliseconds);
+	_renderArgs->SetElapsedMilliseconds(elapsedMilliseconds);
 }

@@ -18,6 +18,7 @@ protected:
 	double _upZ;
 
 public:
+	BaseCamera();
 	void virtual Render(RenderEventArgs* args);
 	void virtual Update(UpdateEventArgs* args);
 

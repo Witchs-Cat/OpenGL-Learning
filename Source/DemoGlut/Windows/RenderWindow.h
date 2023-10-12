@@ -15,9 +15,12 @@ private:
 	int _width;
 	int _height;
 	int _updateTime;
-	std::string _title;
 
+	std::string _title;
 	std::list<Entity*> _renderedEntities;
+	
+	unsigned short int _framesCount;
+	double _elapsedMilliseconds;
 
 public:
 	//Проблемка, как не допустить утечку памяти, 

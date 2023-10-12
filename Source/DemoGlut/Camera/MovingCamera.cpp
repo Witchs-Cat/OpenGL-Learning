@@ -2,10 +2,22 @@
 
 void MovingCamera::UpdateCameraPosition()
 {
-	_cameraX = _radius * sin(_angleO) * cos(_angleF) + _targetX;
-	_cameraY = _radius * sin(_angleO) * sin(_angleF) + _targetY;
-	_cameraZ = _radius * cos(_angleO) + _targetZ;
+	float radF = _angleF / 180 * 3.14159f;
+	float radO = _angleO / 180 * 3.14159f;
 
+	_cameraX = _radius * sin(radO) * cos(radF) + _targetX;
+	_cameraY = _radius * cos(radO) + _targetY; 
+	_cameraZ = _radius * sin(radO) * sin(radF) + _targetZ;
+
+}
+
+MovingCamera::MovingCamera(float radius, float angelO, float angelF)
+{
+	_radius = radius;
+	_angleO = angelO;
+	_angleF = angelF;
+
+	UpdateCameraPosition();
 }
 
 void MovingCamera::Update(UpdateEventArgs* args)
@@ -23,17 +35,18 @@ void MovingCamera::Update(UpdateEventArgs* args)
 		_targetX += elapsed / 500;
 
 	if (args->KeyIsPressed(VK_SHIFT))
-		_radius += elapsed / 100;
+		setRadius(_radius + elapsed / 100);
 	if (args->KeyIsPressed(VK_CONTROL))
-		_radius -= elapsed / 100;
+		setRadius(_radius - elapsed / 100);
 
 	if (args->KeyIsPressed(VK_LBUTTON))
 	{
-		POINT* cursorMove = args->GetCursorMove();
-		//setAngelF(_angleF + cursorMove->y / 500.0f);
-		setAngelO(_angleO - cursorMove->x / 500.0f);
+		POINT* cursorMove = args->GetCursorData()->GetMove();
+		setAngelO(_angleO + cursorMove->y / 5.0f);
+		setAngelF(_angleF + cursorMove->x / 5.0f);
+		//std::cout << "F= " << _angleF << " O= " << _angleO << " R= " << _radius << std::endl;
+		//std::cout << "X= " << _cameraX << " Y= " << _cameraY << " Z= " << _cameraZ << std::endl;
 	}
-
 
 	UpdateCameraPosition();
 }

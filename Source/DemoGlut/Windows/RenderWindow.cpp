@@ -24,6 +24,9 @@ void RenderWindow::Resize(int w, int h)
 
 void RenderWindow::Update(UpdateEventArgs* args)
 {
+	if (args->KeyIsPressed(VK_ESCAPE))
+		exit(0);
+
 	if (Camera != nullptr)
 		Camera->Update(args);
 
@@ -38,6 +41,19 @@ void RenderWindow::Render(RenderEventArgs* args)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
+	double elapsed = args->GetElapsedMilliseconds();
+	_elapsedMilliseconds += elapsed;
+	_framesCount++;
+
+	if (_elapsedMilliseconds > 1E3)
+	{
+		int fps = _framesCount / _elapsedMilliseconds * 1E3;
+		glutSetWindowTitle(std::to_string(fps).c_str());
+
+		_framesCount = 0;
+		_elapsedMilliseconds = 0;
+	}
 	
 	if (Camera != nullptr)
 		Camera->Render(args);
@@ -52,13 +68,9 @@ void RenderWindow::Display(void)
 {
 	UpdateEventArgs* updateArgs;
 	RenderEventArgs* renderArgs;
-	_eventsFactory->GetEventArgs(updateArgs, renderArgs);
-	Update(updateArgs);
-	Render(renderArgs);
-
-
-	delete updateArgs;
-	delete renderArgs;
+	_eventsFactory->UpdateState();
+	Update(_eventsFactory->GetUpdateArgs());
+	Render(_eventsFactory->GetRenderArgs());
 }
 
 int RenderWindow::GetUpdateTime()
@@ -80,7 +92,6 @@ void RenderWindow::Init()
 {
 	// инициализация дисплея (формат вывода)
 	glutInitDisplayMode(_displayMode);
-
 	// СОЗДАНИЕ ОКНА:
 	// 1. устанавливаем верхний левый угол окна
 	glutInitWindowPosition(_positionX, _positionY);

@@ -2,8 +2,7 @@
 
 #include "Includes.h"
 
-#include "EventArgs/UpdateEventArgs.h"
-#include "EventArgs/RenderEventArgs.h"
+#include "EventArgs/EventsFactory.h"
 
 class IDisplayedObject abstract
 {

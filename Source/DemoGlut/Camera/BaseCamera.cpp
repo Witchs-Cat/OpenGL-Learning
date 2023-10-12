@@ -1,5 +1,12 @@
 #include "BaseCamera.h"
 
+BaseCamera::BaseCamera()
+{
+	_cameraX = 0; _cameraY = 0; _cameraZ = 0;
+	_targetX = 0; _targetY = 0; _targetZ = 0;
+	_upX = 0; _upY = 0; _upZ = 0;
+}
+
 void BaseCamera::Render(RenderEventArgs* args)
 {
 	gluLookAt(_cameraX, _cameraY, _cameraZ,

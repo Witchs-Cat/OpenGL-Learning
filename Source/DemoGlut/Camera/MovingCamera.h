@@ -9,11 +9,14 @@ private:
     float _angleO;
     //X ~ Y
     float _angleF;
-    float _radius = 30;
+    float _radius;
 
     
     void UpdateCameraPosition();
 public:
+
+    MovingCamera(float radius, float angelO, float angelF);
+
     void Update(UpdateEventArgs* args) override;
 
     void setAngelO(float angel);

@@ -5,6 +5,8 @@
 
 #include "Windows/RenderWindow.h"
 #include "Entities/Primitives/Teapot.h"
+#include "Entities/Primitives/Grid.h"
+
 
 RenderWindow* window;
 
@@ -14,23 +16,39 @@ void Display()
 void Reshape(int w, int h)
 {	window->Resize(w, h);}
 
-void Simulation(int value)
-{
-	glutPostRedisplay();
-	// эта же функция будет вызвана еще раз спустя время
-	glutTimerFunc(window->GetUpdateTime() , Simulation, 0);
-}
-
 void FillWithEntities()
 {
-	window->SetCamera(new MovingCamera());
-	window->Camera->SetCameraPosition(0, 0, 55);
+	window->SetCamera(new MovingCamera(30, 1, 1));
 	window->Camera->SetUpVector(0, 1, 0);
 
-	window->AddEntity(new Teapot(1.0f, 5.0f, 0.0f, 0.0f));
-	window->AddEntity(new Teapot(2.0f, 0.0f, 5.0f, 0.0f));
-	window->AddEntity(new Teapot(4.0f, -5.0f, 0.0f, 0.0f));
-	window->AddEntity(new Teapot(6.0f, 0.0f, -5.0f, 0.0f));
+	Teapot* entity = new Teapot(1.0f);
+	entity->SetColor(0.0, 1.0, 1.0);
+	entity->SetPosition(5.0f, 0.0f, 0.0f);
+	entity->RotateXZ(180);
+	window->AddEntity(entity);
+
+	entity = new Teapot(2.0f);
+	entity->SetColor(1.0, 0.0, 0.0);
+	entity->SetPosition(0.0f, 0.0f, 5.0f);
+	entity->RotateXZ(270);
+	window->AddEntity(entity);
+
+	entity = new Teapot(1.0f);
+	entity->SetColor(1.0, 0.0, 1.0);
+	entity->SetPosition(-5.0f, 0.0f, 0.0f);
+	entity->RotateXZ(0);
+	window->AddEntity(entity);
+
+	entity = new Teapot(1.0f);
+	entity->SetColor(0.0, 0.0, 1.0);
+	entity->SetPosition(0.0f, 0.0f, -5.0f);
+	entity->RotateXZ(90);
+	window->AddEntity(entity);
+
+	Entity* entity2 = new Grid();
+	window->AddEntity(entity2);
+
+
 }
 
 int main(int argc, char** argv)
@@ -54,8 +72,8 @@ int main(int argc, char** argv)
 	glutDisplayFunc(Display);
 	// устанавливаем функцию, которая будет вызываться при изменении размеров окна
 	glutReshapeFunc(Reshape);
-	// устанавливаем функцию, которая будет вызвана через 0 мс
-	glutTimerFunc(0, Simulation, 0);
+	// устанавливаем функцию, которая будет вызваться по кд
+	glutIdleFunc(glutPostRedisplay);
 	// основной цикл обработки сообщений ОС
 	glutMainLoop();
 

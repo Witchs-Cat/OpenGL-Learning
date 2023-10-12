@@ -1,5 +1,4 @@
 #pragma once
-
 #include "../Includes.h"
 
 //“”“ ¬Õ»Ã¿Õ»≈
@@ -9,7 +8,7 @@ class BaseEventArgs abstract
 private:
 	double _elapsedMilliseconds;
 public:
-	BaseEventArgs(double elapsedMilliseconds);
 	double GetElapsedMilliseconds();
+	void SetElapsedMilliseconds(double elapsedMilliseconds);
 };
 

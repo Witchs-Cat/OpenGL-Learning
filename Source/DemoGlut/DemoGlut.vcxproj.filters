@@ -30,10 +30,10 @@
     <ClCompile Include="EventArgs\BaseEventArgs.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="EventArgs\UpdateEventArgs.cpp">
+    <ClCompile Include="EventArgs\UpdateArgs\UpdateEventArgs.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="EventArgs\RenderEventArgs.cpp">
+    <ClCompile Include="EventArgs\RenderArgs\RenderEventArgs.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Camera\BaseCamera.cpp">
@@ -49,6 +49,12 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Entities\GlutEntity.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="EventArgs\UpdateArgs\CursorData.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Primitives\Grid.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,10 +74,10 @@
     <ClInclude Include="EventArgs\BaseEventArgs.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="EventArgs\UpdateEventArgs.h">
+    <ClInclude Include="EventArgs\UpdateArgs\UpdateEventArgs.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="EventArgs\RenderEventArgs.h">
+    <ClInclude Include="EventArgs\RenderArgs\RenderEventArgs.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Camera\BaseCamera.h">
@@ -90,6 +96,12 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Entities\GlutEntity.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="EventArgs\UpdateArgs\CursorData.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Primitives\Grid.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

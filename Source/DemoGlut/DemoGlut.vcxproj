@@ -152,27 +152,31 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera\BaseCamera.cpp" />
+    <ClCompile Include="EventArgs\UpdateArgs\CursorData.cpp" />
     <ClCompile Include="EventArgs\BaseEventArgs.cpp" />
     <ClCompile Include="DemoGlut.cpp" />
     <ClCompile Include="Entities\Entity.cpp" />
     <ClCompile Include="Entities\Primitives\Teapot.cpp" />
-    <ClCompile Include="EventArgs\UpdateEventArgs.cpp" />
-    <ClCompile Include="EventArgs\RenderEventArgs.cpp" />
+    <ClCompile Include="EventArgs\UpdateArgs\UpdateEventArgs.cpp" />
+    <ClCompile Include="EventArgs\RenderArgs\RenderEventArgs.cpp" />
     <ClCompile Include="EventArgs\EventsFactory.cpp" />
     <ClCompile Include="Camera\MovingCamera.cpp" />
     <ClCompile Include="Entities\GlutEntity.cpp" />
+    <ClCompile Include="Entities\Primitives\Grid.cpp" />
     <ClCompile Include="Windows\RenderWindow.cpp" />
     <ClCompile Include="Windows\WindowSettings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\BaseCamera.h" />
+    <ClInclude Include="EventArgs\UpdateArgs\CursorData.h" />
     <ClInclude Include="EventArgs\BaseEventArgs.h" />
     <ClInclude Include="Entities\Entity.h" />
     <ClInclude Include="Entities\Primitives\Teapot.h" />
     <ClInclude Include="Entities\GlutEntity.h" />
+    <ClInclude Include="Entities\Primitives\Grid.h" />
     <ClInclude Include="Includes.h" />
-    <ClInclude Include="EventArgs\UpdateEventArgs.h" />
-    <ClInclude Include="EventArgs\RenderEventArgs.h" />
+    <ClInclude Include="EventArgs\UpdateArgs\UpdateEventArgs.h" />
+    <ClInclude Include="EventArgs\RenderArgs\RenderEventArgs.h" />
     <ClInclude Include="EventArgs\EventsFactory.h" />
     <ClInclude Include="IDisplayedObject.h" />
     <ClInclude Include="Camera\MovingCamera.h" />
