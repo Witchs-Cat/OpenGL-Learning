@@ -20,6 +20,10 @@ void GlutEntity::PushGlutEntity()
 void GlutEntity::Render(RenderEventArgs* args)
 {
 	glColor3f(_red, _green, _blue);
+
+	if (_material != nullptr)
+		_material->Apply();
+
 	glPushMatrix();
 	glMultMatrixf(_modelMatrix);
 	this->PushGlutEntity();

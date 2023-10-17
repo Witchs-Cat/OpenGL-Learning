@@ -24,13 +24,12 @@ void MovingCamera::Update(UpdateEventArgs* args)
 {
 	double elapsed = args->GetElapsedMilliseconds();
 
-	//Позиция курсора не высчитывается 
 	if (args->KeyIsPressed('W'))
-		_targetY += elapsed / 500;
+		_targetZ += elapsed / 500;
 	if (args->KeyIsPressed('A'))
 		_targetX -= elapsed / 500;
 	if (args->KeyIsPressed('S'))
-		_targetY -= elapsed / 500;
+		_targetZ -= elapsed / 500;
 	if (args->KeyIsPressed('D'))
 		_targetX += elapsed / 500;
 
@@ -42,23 +41,28 @@ void MovingCamera::Update(UpdateEventArgs* args)
 	if (args->KeyIsPressed(VK_LBUTTON))
 	{
 		POINT* cursorMove = args->GetCursorData()->GetMove();
-		setAngelO(_angleO + cursorMove->y / 5.0f);
+		setAngelO(_angleO - cursorMove->y / 5.0f);
 		setAngelF(_angleF + cursorMove->x / 5.0f);
-		//std::cout << "F= " << _angleF << " O= " << _angleO << " R= " << _radius << std::endl;
-		//std::cout << "X= " << _cameraX << " Y= " << _cameraY << " Z= " << _cameraZ << std::endl;
 	}
 
 	UpdateCameraPosition();
 }
 
-void MovingCamera::setAngelO(float angel)
+void MovingCamera::setAngelO(float angle)
 {
-		_angleO = angel;
+	if (angle > 85) angle = 85;
+	else if (angle < 5) angle = 5;
+
+	_angleO = angle;
 }
 
-void MovingCamera::setAngelF(float angel)
+void MovingCamera::setAngelF(float angle)
 {
-		_angleF = angel;
+
+	if (angle > 360) angle -= 360;
+	else if (angle < -360) angle += 360;
+
+	_angleF = angle;
 }
 
 void MovingCamera::setRadius(float radius)

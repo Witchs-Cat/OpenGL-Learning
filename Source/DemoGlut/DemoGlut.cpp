@@ -1,12 +1,9 @@
 ﻿// DemoGlut.Camera.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
-#include <iostream>
-
 #include "Windows/RenderWindow.h"
 #include "Entities/Primitives/Teapot.h"
 #include "Entities/Primitives/Grid.h"
-
 
 RenderWindow* window;
 
@@ -18,41 +15,57 @@ void Reshape(int w, int h)
 
 void FillWithEntities()
 {
-	window->SetCamera(new MovingCamera(30, 1, 1));
-	window->Camera->SetUpVector(0, 1, 0);
+	shared_ptr<BaseMaterial> material1 = BaseMaterial::LoadFromYaml("Assets/Materials/Material1.yaml");
+	shared_ptr<BaseMaterial> material2 = BaseMaterial::LoadFromYaml("Assets/Materials/Material2.yaml");
+	shared_ptr<BaseMaterial> material3 = BaseMaterial::LoadFromYaml("Assets/Materials/Material3.yaml");
+	shared_ptr<BaseMaterial> material4 = BaseMaterial::LoadFromYaml("Assets/Materials/Material4.yaml");
 
-	Teapot* entity = new Teapot(1.0f);
+	shared_ptr<BaseCamera> camera = shared_ptr<BaseCamera>(new MovingCamera(30, 1, 1));
+	camera->SetUpVector(0, 1, 0);
+	window->SetCamera(camera);
+
+	shared_ptr<BaseLight> ligth = shared_ptr<BaseLight>(new BaseLight(20,15,20));
+	ligth->SetDiffuse(vec4(0.5, 0.5, 0.5, 1));
+	ligth->SetAmbient(vec4(0.1, 0.1, 0.1, 1));
+	ligth->SetSpecular(vec4(0.1, 0.1, 0.1, 1));
+	window->SetLigth(ligth);
+
+	shared_ptr<Teapot> entity = shared_ptr<Teapot>(new Teapot(1.0f, true));
 	entity->SetColor(0.0, 1.0, 1.0);
+	entity->SetMaterial(material1);
 	entity->SetPosition(5.0f, 0.0f, 0.0f);
 	entity->RotateXZ(180);
 	window->AddEntity(entity);
 
-	entity = new Teapot(2.0f);
+	entity = shared_ptr<Teapot>(new Teapot(2.0f, true));
 	entity->SetColor(1.0, 0.0, 0.0);
+	entity->SetMaterial(material2);
 	entity->SetPosition(0.0f, 0.0f, 5.0f);
 	entity->RotateXZ(270);
 	window->AddEntity(entity);
 
-	entity = new Teapot(1.0f);
+	entity = shared_ptr<Teapot>(new Teapot(1.0f, true));
 	entity->SetColor(1.0, 0.0, 1.0);
+	entity->SetMaterial(material3);
 	entity->SetPosition(-5.0f, 0.0f, 0.0f);
 	entity->RotateXZ(0);
 	window->AddEntity(entity);
 
-	entity = new Teapot(1.0f);
+	entity = shared_ptr<Teapot>(new Teapot(1.0f, true));
 	entity->SetColor(0.0, 0.0, 1.0);
+	entity->SetMaterial(material4);
 	entity->SetPosition(0.0f, 0.0f, -5.0f);
 	entity->RotateXZ(90);
 	window->AddEntity(entity);
 
-	Entity* entity2 = new Grid();
+	shared_ptr<Entity> entity2 = shared_ptr<Entity>(new Grid());
+	entity->SetMaterial(material4);
 	window->AddEntity(entity2);
-
-
 }
 
 int main(int argc, char** argv)
 {	
+	ShowWindow(GetConsoleWindow(), SW_HIDE);
 	auto settings = new WindowSettings();
 	settings->DisplayMode = GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE;
 	settings->Height = 300;
@@ -65,6 +78,7 @@ int main(int argc, char** argv)
 
 	// инициализация библиотеки GLUT
 	glutInit(&argc, argv);
+
 
 	// инициализируем окно
 	window->Init();

@@ -2,7 +2,8 @@
 
 RenderWindow::RenderWindow(WindowSettings* settings)
 {
-	Camera = nullptr;
+	_light = shared_ptr<BaseLight>(new BaseLight());
+	_camera = shared_ptr<BaseCamera>(new BaseCamera());
 	_eventsFactory = new EventsFactory();
 	_displayMode = settings->DisplayMode;
 	_positionX = settings->PositionX;
@@ -27,11 +28,26 @@ void RenderWindow::Update(UpdateEventArgs* args)
 	if (args->KeyIsPressed(VK_ESCAPE))
 		exit(0);
 
-	if (Camera != nullptr)
-		Camera->Update(args);
+	_camera->Update(args);
 
-	for (Entity* entity : _renderedEntities)
+	for (shared_ptr<Entity> entity : _renderedEntities)
 		entity->Update(args);
+}
+
+void RenderWindow::CalculateFPS(RenderEventArgs* args)
+{
+	double elapsed = args->GetElapsedMilliseconds();
+	_elapsedMilliseconds += elapsed;
+	_framesCount++;
+
+	if (_elapsedMilliseconds > 1E3)
+	{
+		int fps = _framesCount / _elapsedMilliseconds * 1E3;
+		glutSetWindowTitle(("fps: " + std::to_string(fps)).c_str());
+
+		_framesCount = 0;
+		_elapsedMilliseconds = 0;
+	}
 }
 
 void RenderWindow::Render(RenderEventArgs* args)
@@ -41,24 +57,13 @@ void RenderWindow::Render(RenderEventArgs* args)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-
-	double elapsed = args->GetElapsedMilliseconds();
-	_elapsedMilliseconds += elapsed;
-	_framesCount++;
-
-	if (_elapsedMilliseconds > 1E3)
-	{
-		int fps = _framesCount / _elapsedMilliseconds * 1E3;
-		glutSetWindowTitle(std::to_string(fps).c_str());
-
-		_framesCount = 0;
-		_elapsedMilliseconds = 0;
-	}
 	
-	if (Camera != nullptr)
-		Camera->Render(args);
+	CalculateFPS(args);
 
-	for (Entity* entity : _renderedEntities)
+	_camera->Render(args);
+	_light->Apply(GL_LIGHT0);
+	
+	for (shared_ptr<Entity> entity : _renderedEntities)
 		entity->Render(args);
 
 	glutSwapBuffers();
@@ -66,8 +71,6 @@ void RenderWindow::Render(RenderEventArgs* args)
 
 void RenderWindow::Display(void)
 {
-	UpdateEventArgs* updateArgs;
-	RenderEventArgs* renderArgs;
 	_eventsFactory->UpdateState();
 	Update(_eventsFactory->GetUpdateArgs());
 	Render(_eventsFactory->GetRenderArgs());
@@ -78,14 +81,23 @@ int RenderWindow::GetUpdateTime()
 	return _updateTime;
 }
 
-void RenderWindow::AddEntity(Entity* entity)
+void RenderWindow::AddEntity(shared_ptr<Entity> entity)
 {
 	_renderedEntities.push_back(entity);
 }
 
-void RenderWindow::SetCamera(BaseCamera* camera)
+void RenderWindow::SetCamera(shared_ptr<BaseCamera> camera)
 {
-	Camera = camera;
+	if (_camera == nullptr)
+		return;
+	_camera = camera;
+}
+
+void RenderWindow::SetLigth(shared_ptr<BaseLight> light)
+{
+	if (light == nullptr)
+		return;
+	_light = light;
 }
 
 void RenderWindow::Init()
@@ -102,6 +114,13 @@ void RenderWindow::Init()
 
 	//¬ключаем один раз тест глубины и не праимс€.
 	glEnable(GL_DEPTH_TEST);
+	//¬ключаем тест света.
+	glEnable(GL_LIGHTING);
+	// включаем нулевой источник света
+	glEnable(GL_LIGHT0);
+	// устанавливаем общую фоновую освещенность
+	GLfloat globalAmbientColor[] = { 0.2, 0.2, 0.2, 1.0 };
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbientColor);
 
 	_eventsFactory->UpdateState();
 }

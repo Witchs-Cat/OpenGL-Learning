@@ -3,6 +3,11 @@
 void Entity::Update(UpdateEventArgs* args)
 { }
 
+void Entity::SetMaterial(shared_ptr<BaseMaterial> material)
+{
+	_material = material;
+}
+
 
 void Entity::Render(RenderEventArgs* args) 
 { }
@@ -13,6 +18,7 @@ Entity::Entity()
 	_y = 0;
 	_z = 0;
 	_size = 1;
+	_material = nullptr;
 }
 
 void Entity::SetPosition(float x,float y,float z)

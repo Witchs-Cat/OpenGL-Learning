@@ -110,13 +110,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\freeglut\include;$(SolutionDir)Dependencies\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\freeglut\include;$(SolutionDir)Dependencies\glm;$(SolutionDir)Dependencies\yaml-cpp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\freeglut\lib\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;freeglut.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\freeglut\lib\x64;$(SolutionDir)Dependencies\yaml-cpp\build\debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;freeglut.lib;yaml-cppd.lib</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
       <Command>
@@ -131,7 +131,8 @@
       </Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>copy /Y $(SolutionDir)Dependencies\freeglut\bin\x64 $(OutDir)</Command>
+      <Command>copy /Y $(SolutionDir)Dependencies\freeglut\bin\x64 $(OutDir)
+copy /Y $(SolutionDir)Dependencies\yaml-cpp\build\Debug\yaml-cppd.dll $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -151,6 +152,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Materials\BaseMaterial.cpp" />
+    <ClCompile Include="Lights\BaseLight.cpp" />
     <ClCompile Include="Camera\BaseCamera.cpp" />
     <ClCompile Include="EventArgs\UpdateArgs\CursorData.cpp" />
     <ClCompile Include="EventArgs\BaseEventArgs.cpp" />
@@ -167,6 +170,8 @@
     <ClCompile Include="Windows\WindowSettings.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Materials\BaseMaterial.h" />
+    <ClInclude Include="Lights\BaseLight.h" />
     <ClInclude Include="Camera\BaseCamera.h" />
     <ClInclude Include="EventArgs\UpdateArgs\CursorData.h" />
     <ClInclude Include="EventArgs\BaseEventArgs.h" />
@@ -182,6 +187,22 @@
     <ClInclude Include="Camera\MovingCamera.h" />
     <ClInclude Include="Windows\RenderWindow.h" />
     <ClInclude Include="Windows\WindowSettings.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="Assets\Materials\Material1.yaml">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="Assets\Materials\Material2.yaml">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Assets\Materials\Material3.yaml">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Assets\Materials\Material4.yaml">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

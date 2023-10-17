@@ -22,14 +22,12 @@ RenderEventArgs* EventsFactory::GetRenderArgs()
 
 void EventsFactory::UpdateState()
 {
-	auto now = std::chrono::system_clock::now();
+	auto now = system_clock::now();
 
 	long long elapsedMicroseconds = (now.time_since_epoch() - _lastRenderingTime.time_since_epoch()).count();
-	double elapsedMilliseconds = elapsedMicroseconds / 10E3;
+	double elapsedMilliseconds = elapsedMicroseconds / 1E4;
 
 	_lastRenderingTime = now;
-
-	auto cursorMove = new POINT();
 
 	POINT cursorPosition;
 	if (GetCursorPos(&cursorPosition))

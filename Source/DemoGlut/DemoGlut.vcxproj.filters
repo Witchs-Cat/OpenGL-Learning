@@ -57,6 +57,12 @@
     <ClCompile Include="Entities\Primitives\Grid.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Lights\BaseLight.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Materials\BaseMaterial.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entities\Entity.h">
@@ -104,5 +110,17 @@
     <ClInclude Include="Entities\Primitives\Grid.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Lights\BaseLight.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Materials\BaseMaterial.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="Assets\Materials\Material1.yaml" />
+    <CopyFileToFolders Include="Assets\Materials\Material2.yaml" />
+    <CopyFileToFolders Include="Assets\Materials\Material3.yaml" />
+    <CopyFileToFolders Include="Assets\Materials\Material4.yaml" />
   </ItemGroup>
 </Project>
